@@ -1,0 +1,32 @@
+/* RichTextEditor.css */
+
+/* Correct list item spacing */
+.editor-content ul,
+.editor-content ol {
+  padding-left: 20px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.editor-content ul {
+  list-style-type: disc;
+}
+
+.editor-content ol {
+  list-style-type: decimal;
+}
+
+/* Task List (Checkable List) Styling */
+.editor-content ul[data-type="taskList"] {
+  list-style: none;
+  padding-left: 0;
+}
+
+.editor-content ul[data-type="taskList"] li {
+  display: flex;
+  align-items: center;
+}
+
+.editor-content ul[data-type="taskList"] input[type="checkbox"] {
+  margin-right: 10px;
+}
