@@ -20,7 +20,7 @@ const ShopFooter: React.FC = () => {
   const companyLinks: LinkItem[] = [
     { name: "About Us", link: "/about" },
     { name: "Contact Us", link: "/contact" },
-    { name: "Customer Services", link: "/customer-services" },
+    // { name: "Customer Services", link: "/customer-services" },
   ];
 
   const policyLinks: LinkItem[] = [
@@ -28,7 +28,7 @@ const ShopFooter: React.FC = () => {
     { name: "Privacy Policy", link: "/privacy-policy" },
     // { name: "Return Policy", link: "/return-policy" },
     { name: "secure-shopping", link: "/secure-shopping" },
-    { name: "Cancellation & Refunds", link: "/cancellation-refunds" },
+    // { name: "Cancellation & Refunds", link: "/cancellation-refunds" },
     { name: "shipping-and-return", link: "/shipping-and-return" },
     // { name: "Request a Product", link: "/request-a-product" },
   ];
