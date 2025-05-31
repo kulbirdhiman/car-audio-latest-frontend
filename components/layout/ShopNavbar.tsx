@@ -29,7 +29,7 @@ const ShopNavBar: React.FC<NavBarProps> = ({ open, setOpen, departments }) => {
   return (
     <div className="w-full ">
       {/* Top Bar */}
-      <div className="hidden md:flex justify-between items-center text-xs text-black py-2 px-4 bg-white">
+      {/* <div className="hidden md:flex justify-between items-center text-xs text-black py-2 px-4 bg-white">
         <h4>Welcome to car audio expert</h4>
         <div className="flex gap-4">
           <Link href="/support" className="text-sm hover:underline">
@@ -42,7 +42,7 @@ const ShopNavBar: React.FC<NavBarProps> = ({ open, setOpen, departments }) => {
             For Business ↗
           </Link>
         </div>
-      </div>
+      </div> */}
 
       {/* Main Navigation */}
       <div className="bg-white text-black">
