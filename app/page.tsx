@@ -7,14 +7,15 @@ import AudioSection from '@/components/home/AudioSection'
 import NewArrivals from '@/components/home/newArrivals'
 const page = () => {
   return (
-    <div>
-      <div>
+    <div className='xl:max-w-[1700px] mx-auto'>
+     <div >
+
         <HeroSection />
       </div>
       <div>
         <WhatWeOffer />
       </div>
-      <div>
+      <div className='xl:w-13/14 mx-auto'>
       <SteeringMatchFinder />
       </div>
       <Accessories />

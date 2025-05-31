@@ -17,12 +17,12 @@ const Accessories = () => {
     slug:"products?category=satnav-stereo"
   },
   {
-    name: "audio-equipments",
+    name: "Audio equipments",
     image: audioequipments,
     slug:"products?category=audio-equipments"
   },
   {
-    name: "sterring wheel",
+    name: "Steering Wheel's",
     image: sterringwheel,
     slug:"products?category=steering-wheel"
   },
@@ -33,13 +33,13 @@ const Accessories = () => {
 
   },
   {
-    name: "Frames fascias",
+    name: "Frame's & Fascia's",
     image: fa,
     slug:"products?category=frames-fascias"
 
   },
   {
-    name: "accessories",
+    name: "Accessories",
     image: abc,
     slug:"products?category=accessories"
   },
@@ -73,7 +73,7 @@ const Accessories = () => {
 
             <div className="flex flex-col justify-center">
               <h2 className="text-base hidden md:block sm:text-xl font-semibold">{name}</h2>
-              <p className="text-xs hidden md:block sm:text-sm text-gray-600">(100) items Available</p>
+              {/* <p className="text-xs hidden md:block sm:text-sm text-gray-600">(100) items Available</p> */}
             </div>
             {/* </Link> */}
           </Link>

@@ -52,18 +52,18 @@ const ShopFooter: React.FC = () => {
             Car audio expert is one of the fastest-growing manufacturers of car entertainment products. Founded in Germany in 1997.
           </p>
           <div className="flex gap-3 mt-4 text-lg">
-            <Link href="https://www.facebook.com/KayhanAudio/" target="_blank">
+            <Link href="https://www.facebook.com/search/top?q=car%20audio%20expert" target="_blank">
               <FaFacebook className="hover:text-white text-blue-500" />
             </Link>
-            <Link href="https://x.com/AudioKayhan" target="_blank">
+            {/* <Link href="https://x.com/AudioKayhan" target="_blank">
               <FaTwitter className="hover:text-white text-blue-400" />
-            </Link>
-            <Link href="https://www.instagram.com/kayhanaudio/" target="_blank">
+            </Link> */}
+            <Link href="https://www.instagram.com/car.audio.expert/" target="_blank">
               <FaInstagram className="hover:text-white text-pink-500" />
             </Link>
-            <Link href="https://www.youtube.com/@KAYHANAUDIO" target="_blank">
+            {/* <Link href="https://www.youtube.com/@KAYHANAUDIO" target="_blank">
               <FaYoutube className="hover:text-white text-red-600" />
-            </Link>
+            </Link> */}
           </div>
         </div>
 

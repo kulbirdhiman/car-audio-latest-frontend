@@ -8,9 +8,9 @@ import Link from "next/link";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import { motion } from "framer-motion";
 import { useState } from "react";
-import headunit from "@/public/v6Banner.png"
-import amp from "@/public/images/Amp-banner.png"
-import speaker from "@/public/images/Speaker-Banner.png"
+import headunit from "@/public/Banner-1.png"
+import amp from "@/public/Banner 2.png"
+import speaker from "@/public/Banner 3.png"
 
 const slides = [
   {
@@ -50,7 +50,7 @@ const ImageSlider = () => {
       >
         {slides.map((slide, index) => (
           <SwiperSlide key={index}>
-            <div className="relative  w-10/12 mx-auto rounded-lg h-[250px] sm:h-[300px] ">
+            <div className="relative w-11/12 xl:w-12/13 mx-auto rounded-lg h-[250px] sm:h-[300px] ">
               <Image
                 priority={index === 0}
                 quality={100}
@@ -62,7 +62,8 @@ const ImageSlider = () => {
               />
               {index === activeSlide && (
                 <motion.div
-                  className="absolute inset-0 flex flex-col items-start justify-center p-4 sm:p-8 text-left font-serif text-white"
+                  className={`absolute inset-0 flex flex-col items-start justify-center p-4 sm:p-8 text-left font-serif
+                      ${index === 0 ? "text-black": "text-white"}`}
                   initial={{ opacity: 0, x: -50 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.8 }}
@@ -75,7 +76,7 @@ const ImageSlider = () => {
                   </p>
                   <Link
                     href={slide.slug}
-                    className="text-xs sm:text-lg border p-1 rounded border-white text-white mt-3 hover:bg-white hover:text-black transition"
+                    className={`text-xs ${index === 0 ? "text-black": "text-white"} sm:text-lg border p-1 rounded  mt-3 hover:bg-white hover:text-black transition`}
                   >
                     Shop Now
                   </Link>
