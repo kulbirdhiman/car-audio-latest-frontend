@@ -72,7 +72,7 @@ const ShippingPolicy = () => {
       <h2 className="text-2xl font-semibold text-gray-800 mt-6">4. Further Questions?</h2>
       <p className="text-gray-700">Contact our Customer Care Team at <strong>1300 696 488</strong>. Our advisors are here to help.</p>
 
-      <p className="text-center text-gray-800 font-bold text-lg mt-6">Thank you for choosing Kayhan Audio! 🚗🔊</p>
+      <p className="text-center text-gray-800 font-bold text-lg mt-6">Thank you for choosing car audio expert! 🚗🔊</p>
     </div>
   );
 };
