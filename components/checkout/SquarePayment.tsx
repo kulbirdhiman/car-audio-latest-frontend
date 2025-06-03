@@ -21,9 +21,10 @@ const SquarePayment: React.FC<any> = ({
 }) => {
   const { loading, user } = useSelector((state: RootState) => state.auth);
 
+
   const dispatch = useDispatch<AppDispatch>();
 
-  const [loader, setLoader] = useState(false);
+  const [loader,setLoader] = useState(false)
   const [payment, setPayment] = useState<any>(null);
   const router = useRouter();
   useEffect(() => {
@@ -54,8 +55,9 @@ const SquarePayment: React.FC<any> = ({
   }, []);
 
   const handlePayment = async () => {
+
     if (!payment) return;
-    setLoader(true);
+setLoader(true)
     const { card, payments } = payment;
     const tokenResult = await card.tokenize();
 
@@ -88,7 +90,7 @@ const SquarePayment: React.FC<any> = ({
               order: paymentResponse.order,
             }
           );
-          setLoader(false);
+          setLoader(false)
           localStorage.setItem("addToCart", "[]");
 
           dispatch(loadCart(0));
@@ -101,20 +103,21 @@ const SquarePayment: React.FC<any> = ({
         alert("Payment failed");
       }
     } else {
-      setLoader(false);
+      setLoader(false)
       toast.error("Payment tokenization failed");
     }
+    setLoader(false)
   };
 
   return (
     <div>
       <div id="card-container"></div>
       <button
-        disabled={loader}
+      disabled={loader}
         className="bg- text-black border-2 rounded w-full p-2"
         onClick={handlePayment}
       >
-        {loader ? "loading..." : "Pay Now"}
+    {loader ? "loading..." : "Pay Now"} 
       </button>
     </div>
   );
