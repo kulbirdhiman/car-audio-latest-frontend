@@ -10,7 +10,7 @@ import toast from "react-hot-toast";
 
 const paymentMethods = [
   { id: "credit_card", name: "Credit Card", icon: <FaCcVisa /> },
-  // { id: "paypal", name: "PayPal", icon: <FaCcPaypal /> },
+  { id: "paypal", name: "PayPal", icon: <FaCcPaypal /> },
 ];
 
 const PaymentSelector: React.FC<any> = ({
@@ -104,7 +104,16 @@ const PaymentSelector: React.FC<any> = ({
               shippingAddress={sameAsBilling ? billingAddress : shippingAddress}
             />
           )}
-          {selectedMethod === "paypal" && <PayPalComponent />}
+          {selectedMethod === "paypal" && <PayPalComponent
+          user={""}
+          selectedShipping={selectedShipping}
+            discount={discount}
+              spiner={spiner}
+              setSpiner={setSpiner}
+              productData={productData.result}
+              billingAddress={billingAddress}
+              shippingAddress={sameAsBilling ? billingAddress : shippingAddress}
+          />}
         </div>
       )}
     </div>

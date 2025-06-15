@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 const PaymentSuccess = () => {
   const router = useRouter();
-  const {id} = useParams()
+  const { id } = useParams();
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
@@ -33,11 +33,9 @@ const PaymentSuccess = () => {
         <h2 className="text-2xl md:text-3xl font-bold mt-6 text-gray-800">
           Payment Successful!
         </h2>
+        <p className="text-gray-500 mt-2">Welcome to car audio expertFamily</p>
         <p className="text-gray-500 mt-2">
-Welcome to car audio expertFamily
-        </p>
-        <p className="text-gray-500 mt-2">
-          Your order #{id}  has been confirmed. Thank you for your purchase!
+          Your order #{id} has been confirmed. Thank you for your purchase!
         </p>
 
         {/* Back to Home Button */}
