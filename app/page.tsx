@@ -5,11 +5,13 @@ import SteeringMatchFinder from '@/components/home/SterringWheel'
 import Accessories from '@/components/home/Accessories'
 import AudioSection from '@/components/home/AudioSection'
 import NewArrivals from '@/components/home/newArrivals'
+import Head from 'next/head'
 const page = () => {
   return (
     <div className='xl:max-w-[1700px] mx-auto'>
-     <div >
+      
 
+     <div >
         <HeroSection />
       </div>
       <div>
