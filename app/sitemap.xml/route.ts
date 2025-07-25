@@ -2,28 +2,59 @@
 
 import { NextResponse } from 'next/server';
 
-export async function GET() {
-  const baseUrl = 'https://caraudioexpert.com.au/'; // Replace with your actual domain
+// Example mock DB fetchers (replace with real DB/API calls)
+import axios from 'axios';
 
-  // Example URLs (replace with your dynamic pages)
+ async function fetchProductSlugs(): Promise<string[]> {
+  try {
+    const response = await axios.get('https://caraudioexpert.com.au/v1/product/product-slug');
+    
+    if (response.data && response.data.success) {
+      return response.data.slugs;
+    } else {
+      console.warn('Unexpected response:', response.data);
+      return [];
+    }
+  } catch (error) {
+    console.error('Failed to fetch product slugs:', error);
+    return [];
+  }
+}
+
+
+
+
+export async function GET() {
+  const baseUrl = 'https://caraudioexpert.com.au';
+
   const staticRoutes = [
     '',
     '/about',
     '/contact',
     '/products',
-    "term-condtion",
-    "privacy-policy",
-    "/secure-shopping",
-    "/shipping-and-return"
+    '/term-condtion',
+    '/privacy-policy',
+    '/secure-shopping',
+    '/shipping-and-return',
+    '/cart',
+    '/checkout',
   ];
 
-  const urls = staticRoutes.map(route => {
+  const productSlugs = await fetchProductSlugs();
+
+  const dynamicRoutes = [
+    ...productSlugs.map(slug => `/products/${slug}`),
+  ];
+
+  const allRoutes = [...staticRoutes, ...dynamicRoutes];
+
+  const urls = allRoutes.map(route => {
     return `
       <url>
         <loc>${baseUrl}${route}</loc>
         <lastmod>${new Date().toISOString()}</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
       </url>
     `;
   });
