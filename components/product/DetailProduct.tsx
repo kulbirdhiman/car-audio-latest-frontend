@@ -7,21 +7,15 @@ import { useDebouncedCallback } from "use-debounce";
 import dynamic from "next/dynamic";
 import toast from "react-hot-toast";
 
-import {
-  GiShoppingCart
-} from "react-icons/gi";
-import {
-  HeartIcon,
-  ClipboardIcon
-} from "@heroicons/react/24/outline";
-import {
-  Share2
-} from "lucide-react";
+import { GiShoppingCart } from "react-icons/gi";
+import { HeartIcon, ClipboardIcon } from "@heroicons/react/24/outline";
+import { Share2 } from "lucide-react";
 
 import { ProductForShop } from "@/store/actions/admin/product";
 import { addToCart } from "@/store/actions/cart";
 import { IN_STOCK } from "@/app/constants";
 import { AppDispatch, RootState } from "@/store/store";
+import Head from "next/head";
 
 import ImageGallery from "./ImageGallary";
 import ImageGalleryMobile from "./ImageGallaryMobile";
@@ -30,15 +24,31 @@ import Variations from "./Variation";
 import { ProductDetailSkeleton } from "./ProductDetailSkeleton";
 import Description from "@/components/product/Description";
 
-const TabComponent = dynamic(() => import("@/components/globals/TabComponent"), { ssr: false });
-const Demmovideo = dynamic(() => import("@/components/product/DemmoVideo"), { ssr: false });
-const SpecificationsComponent = dynamic(() => import("@/components/product/Specifications"), { ssr: false });
-const ReviewForm = dynamic(() => import("@/components/product/ReviewForm"), { ssr: false });
+const TabComponent = dynamic(
+  () => import("@/components/globals/TabComponent"),
+  { ssr: false }
+);
+const Demmovideo = dynamic(() => import("@/components/product/DemmoVideo"), {
+  ssr: false,
+});
+const SpecificationsComponent = dynamic(
+  () => import("@/components/product/Specifications"),
+  { ssr: false }
+);
+const ReviewForm = dynamic(() => import("@/components/product/ReviewForm"), {
+  ssr: false,
+});
 // const RelatedProduct = dynamic(() => import("../home/RelatedProduct"), { ssr: false });
 
-const FacebookIcon = dynamic(() => import("react-share").then(mod => mod.FacebookIcon));
-const TwitterIcon = dynamic(() => import("react-share").then(mod => mod.TwitterIcon));
-const WhatsappIcon = dynamic(() => import("react-share").then(mod => mod.WhatsappIcon));
+const FacebookIcon = dynamic(() =>
+  import("react-share").then((mod) => mod.FacebookIcon)
+);
+const TwitterIcon = dynamic(() =>
+  import("react-share").then((mod) => mod.TwitterIcon)
+);
+const WhatsappIcon = dynamic(() =>
+  import("react-share").then((mod) => mod.WhatsappIcon)
+);
 
 const Detail = () => {
   const { slug } = useParams();
@@ -64,7 +74,7 @@ const Detail = () => {
       const res = await dispatch(ProductForShop({ slug })).unwrap();
       if (res.success) {
         const data = res.data.result;
-        console.log(`this is product data ${data}`)
+        console.log(`this is product data ${data}`);
         setProduct(data);
         setAddToData((prev) => ({ ...prev, product_id: (data as any).id }));
         setExtras(res.data.extras || []);
@@ -132,117 +142,198 @@ const Detail = () => {
   };
 
   const tabData = [
-    { id: 1, label: "Descriptions", content: <Description description={product.description} /> },
-    { id: 2, label: "Specifications", content: <SpecificationsComponent Specification={product?.specification} /> },
-    { id: 3, label: "Demo Video", content: <Demmovideo demovideo={product?.demo_video} installationVideo={product?.installation_video} /> },
+    {
+      id: 1,
+      label: "Descriptions",
+      content: <Description description={product.description} />,
+    },
+    {
+      id: 2,
+      label: "Specifications",
+      content: (
+        <SpecificationsComponent Specification={product?.specification} />
+      ),
+    },
+    {
+      id: 3,
+      label: "Demo Video",
+      content: (
+        <Demmovideo
+          demovideo={product?.demo_video}
+          installationVideo={product?.installation_video}
+        />
+      ),
+    },
     { id: 4, label: "Review", content: <ReviewForm /> },
   ];
 
   if (!apiHit) return <ProductDetailSkeleton />;
 
   return (
-    <div className="w-11/12 mx-auto px-4 pb-3 ">
-      {/* Layout */}
-      <div className="grid grid-cols-1 lg:grid-cols-7 gap-6">
-        {/* Gallery */}
-        <div className="lg:col-span-3">
-          <ImageGallery product={product} images={product?.images}/>
-          {/* <ImageGalleryMobile images={product?.images} /> */}
-        </div>
+    <div>
+      {product?.name && (
+        <Head>
+          <title>{product.name}</title>
+          <meta
+            name="description"
+            content={product.description?.slice(0, 150)}
+          />
+          <meta property="og:title" content={product.name} />
+          <meta
+            property="og:description"
+            content={product.description?.slice(0, 150)}
+          />
+          <meta
+            property="og:image"
+            content={product.images?.[0]?.url || "/default-image.jpg"}
+          />
+          <meta property="og:type" content="product" />
+          <meta
+            property="og:url"
+            content={typeof window !== "undefined" ? window.location.href : ""}
+          />
+          <meta name="twitter:card" content="summary_large_image" />
+        </Head>
+      )}
 
-        {/* Product Info */}
-        <div className="lg:col-span-4 space-y-6">
-          <h1 className="text-2xl  font-sans font-medium">{product?.name}</h1>
+      <div className="w-11/12 mx-auto px-4 pb-3 ">
+        {/* Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-7 gap-6">
+          {/* Gallery */}
+          <div className="lg:col-span-3">
+            <ImageGallery product={product} images={product?.images} />
+            {/* <ImageGalleryMobile images={product?.images} /> */}
+          </div>
 
-          {/* <p className="text-xl font-bold text-gray-900">
+          {/* Product Info */}
+          <div className="lg:col-span-4 space-y-6">
+            <h1 className="text-2xl  font-sans font-medium">{product?.name}</h1>
+
+            {/* <p className="text-xl font-bold text-gray-900">
             {product?.wholesale_price ? `$${product?.wholesale_price}` : "--"}
           </p> */}
 
-          <div className="flex items-center gap-4 text-sm">
-            <button className="flex items-center gap-2" onClick={() => toast("Added to Wishlist!")}>
-              <HeartIcon className="h-5" /> Add to Wishlist
-            </button>
-
-            <button onClick={() => setIsSharePopupOpen(true)} className="flex items-center gap-2">
-              <Share2 size={20} /> Share
-            </button>
-          </div>
-
-          {variationData.length > 0 && (
-            <Variations errors={errors} setVariation={setVariation} variation={variation} variationData={variationData} />
-          )}
-
-          {extras.length > 0 && (
-            <AddOn setAddOns={setAddOns} addOns={addOns} extras={extras} />
-          )}
-
-          {/* Quantity & Cart */}
-          <div className="gap-4 mt-4">
-            {(product?.in_stock === IN_STOCK) ? (
-              <>
-               <div className="flex justify-between">
-               <p className="text-xl font-medium text-gray-900">
-             ${product.discount_price <=0 ? product.regular_price : product.discount_price}
-          </p>
-               <div className="flex items-center border border-gray-200  overflow-hidden">
-                  <button onClick={decreaseQuantity} className="w-10 h-10 bg-gray-100 text-lg font-bold">−</button>
-                  <div className="w-12 h-10  flex justify-center items-center text-lg font-semibold">{addToData.quantity}</div>
-                  <button onClick={increaseQuantity} className="w-10 h-10 bg-gray-100 text-lg font-bold">+</button>
-                </div>
-
-               </div>
-               <div className="flex gap-2 p-3" >
-               <button onClick={() => handleCart(false)} className="bg-blue-800 text-white w-[50%] px-4 py-2 rounded hover:scale-105 transition flex items-center gap-2">
-                  <GiShoppingCart /> Add to Cart
-                </button>
-
-                <button onClick={() => handleCart(true)} className="bg-green-600 w-[50%] text-white px-4 py-2 rounded hover:scale-105 transition  items-center gap-2 hidden md:flex">
-                  Buy Now
-                </button>
-               </div>
-              </>
-            ) : (
-              <span className="text-red-500 font-bold">Out of Stock</span>
-            )}
-          </div>
-
-          <p className="text-sm mt-2"><span className="font-bold">SKU:</span> {product?.sku || "N/A"}</p>
-        </div>
-      </div>
-
-      {/* Share Modal */}
-      {isSharePopupOpen && (
-        <div className="fixed inset-0 z-[900] bg-black bg-opacity-50 flex justify-center items-center">
-          <div className="bg-white p-6 rounded-lg shadow-lg relative">
-            <button
-              onClick={() => setIsSharePopupOpen(false)}
-              className="absolute top-2 right-2 text-gray-600 hover:text-gray-800"
-            >✖</button>
-            <h3 className="text-lg font-bold mb-4">Share this Product</h3>
-            <div className="flex gap-4">
-              <FacebookIcon size={32} round />
-              <TwitterIcon size={32} round />
-              <WhatsappIcon size={32} round />
+            <div className="flex items-center gap-4 text-sm">
               <button
-                onClick={copyLinkToClipboard}
-                className="flex items-center gap-2 py-2 px-4 bg-gray-200 rounded hover:bg-gray-300"
+                className="flex items-center gap-2"
+                onClick={() => toast("Added to Wishlist!")}
               >
-                <ClipboardIcon className="h-5" />
-                {isLinkCopied ? "Copied!" : "Copy Link"}
+                <HeartIcon className="h-5" /> Add to Wishlist
+              </button>
+
+              <button
+                onClick={() => setIsSharePopupOpen(true)}
+                className="flex items-center gap-2"
+              >
+                <Share2 size={20} /> Share
               </button>
             </div>
+
+            {variationData.length > 0 && (
+              <Variations
+                errors={errors}
+                setVariation={setVariation}
+                variation={variation}
+                variationData={variationData}
+              />
+            )}
+
+            {extras.length > 0 && (
+              <AddOn setAddOns={setAddOns} addOns={addOns} extras={extras} />
+            )}
+
+            {/* Quantity & Cart */}
+            <div className="gap-4 mt-4">
+              {product?.in_stock === IN_STOCK ? (
+                <>
+                  <div className="flex justify-between">
+                    <p className="text-xl font-medium text-gray-900">
+                      $
+                      {product.discount_price <= 0
+                        ? product.regular_price
+                        : product.discount_price}
+                    </p>
+                    <div className="flex items-center border border-gray-200  overflow-hidden">
+                      <button
+                        onClick={decreaseQuantity}
+                        className="w-10 h-10 bg-gray-100 text-lg font-bold"
+                      >
+                        −
+                      </button>
+                      <div className="w-12 h-10  flex justify-center items-center text-lg font-semibold">
+                        {addToData.quantity}
+                      </div>
+                      <button
+                        onClick={increaseQuantity}
+                        className="w-10 h-10 bg-gray-100 text-lg font-bold"
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
+                  <div className="flex gap-2 p-3">
+                    <button
+                      onClick={() => handleCart(false)}
+                      className="bg-blue-800 text-white w-[50%] px-4 py-2 rounded hover:scale-105 transition flex items-center gap-2"
+                    >
+                      <GiShoppingCart /> Add to Cart
+                    </button>
+
+                    <button
+                      onClick={() => handleCart(true)}
+                      className="bg-green-600 w-[50%] text-white px-4 py-2 rounded hover:scale-105 transition  items-center gap-2 hidden md:flex"
+                    >
+                      Buy Now
+                    </button>
+                  </div>
+                </>
+              ) : (
+                <span className="text-red-500 font-bold">Out of Stock</span>
+              )}
+            </div>
+
+            <p className="text-sm mt-2">
+              <span className="font-bold">SKU:</span> {product?.sku || "N/A"}
+            </p>
           </div>
         </div>
-      )}
 
-      {/* Tab Section */}
-      <Suspense fallback={<div>Loading...</div>}>
-        <div className="mt-10">
-          <TabComponent no_title={true} tabs={tabData} />
-        </div>
+        {/* Share Modal */}
+        {isSharePopupOpen && (
+          <div className="fixed inset-0 z-[900] bg-black bg-opacity-50 flex justify-center items-center">
+            <div className="bg-white p-6 rounded-lg shadow-lg relative">
+              <button
+                onClick={() => setIsSharePopupOpen(false)}
+                className="absolute top-2 right-2 text-gray-600 hover:text-gray-800"
+              >
+                ✖
+              </button>
+              <h3 className="text-lg font-bold mb-4">Share this Product</h3>
+              <div className="flex gap-4">
+                <FacebookIcon size={32} round />
+                <TwitterIcon size={32} round />
+                <WhatsappIcon size={32} round />
+                <button
+                  onClick={copyLinkToClipboard}
+                  className="flex items-center gap-2 py-2 px-4 bg-gray-200 rounded hover:bg-gray-300"
+                >
+                  <ClipboardIcon className="h-5" />
+                  {isLinkCopied ? "Copied!" : "Copy Link"}
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
 
-        {/* <RelatedProduct title="Related Products" data={relatedProduct} /> */}
-      </Suspense>
+        {/* Tab Section */}
+        <Suspense fallback={<div>Loading...</div>}>
+          <div className="mt-10">
+            <TabComponent no_title={true} tabs={tabData} />
+          </div>
+
+          {/* <RelatedProduct title="Related Products" data={relatedProduct} /> */}
+        </Suspense>
+      </div>
     </div>
   );
 };
