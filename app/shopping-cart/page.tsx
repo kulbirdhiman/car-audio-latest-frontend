@@ -166,7 +166,7 @@ const Page: React.FC = () => {
 
         {/* Mobile Checkout Fixed Bottom Bar */}
         {data.result.length > 0 && (
-          <div className="sm:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 z-50 shadow-md">
+          <div className="md:hidden fixed bottom-12 left-0 right-0 bg-white border-t border-gray-200 p-4 z-50 shadow-md">
             <div className="flex justify-between items-center text-sm font-semibold">
               <span>Total: $ {subtotal}</span>
               <Link
