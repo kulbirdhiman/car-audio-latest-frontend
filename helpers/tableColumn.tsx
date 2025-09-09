@@ -635,3 +635,49 @@ export const my_orders_colomn = () => {
     },
   ];
 };
+
+export const redirect_url_colomn = (
+  toggleDrawer: (data?: Record<string, any>) => void,
+  openDelModel: (data?: Record<string, any>) => void
+) => {
+  return [
+    {
+      title: "S.no ",
+      key: "department_id",
+      transform: (value: any, row: any, index: number) => <p>{index + 1}</p>,
+    },
+    {
+      title: "Old Url",
+      key: "source",
+    },
+    {
+      title: "New url",
+      key: "destination",
+    },
+  
+    {
+      title: "Action",
+      key: "action",
+      transform: (value: any, row: any) => (
+        <div className="flex gap-2">
+          <button
+            className="hover:text-violet-600 "
+            onClick={() => {
+              toggleDrawer({ ...row });
+            }}
+          >
+            Edit
+          </button>
+          <button
+            className="hover:text-red-400 "
+            onClick={() => {
+              openDelModel({ ...row });
+            }}
+          >
+            delete
+          </button>
+        </div>
+      ),
+    },
+  ];
+};

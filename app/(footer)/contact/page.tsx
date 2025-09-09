@@ -25,7 +25,7 @@ const ContactPage = () => {
         <div className="text-xs text-gray-600 text-center md:text-left my-4">
           <p>Unit 3, 151 Dohertys Rd, Laverton North 3026, VIC</p>
           <p>Support: 1300 696 488</p>
-          <p>Email: info@kayhanaudio.com.au</p>
+          <p>Email: info@caraudioexpert.com.au</p>
         </div>
 
         <h5 className="py-4 text-center md:text-left font-semibold">Opening Hours</h5>

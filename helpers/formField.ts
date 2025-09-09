@@ -131,3 +131,18 @@ export const getCarModelFields = (
 
 
 
+
+export const redirect_url_fields = [
+  {
+    name: "source",
+    type: "text",
+    label: "Old Url",
+    placeholder: "Enter url...",
+  },
+  {
+    name: "destination",
+    type: "text",
+    label: "New Url",
+    placeholder: "Enter url...",
+  },
+];
