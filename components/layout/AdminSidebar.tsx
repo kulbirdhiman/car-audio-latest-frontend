@@ -12,8 +12,10 @@ import {
   ShoppingCart,
   Percent,
   Puzzle,
+  
   Settings,
   LogOut,
+  ServerCogIcon
 } from "lucide-react";
 
 import { Bars4Icon } from "@heroicons/react/24/outline";
@@ -34,6 +36,7 @@ const sidebarItems = [
   { href: "/admin/departments", icon: Table, label: "Departments" },
   { href: "/admin/categories", icon: Tags, label: "Categories" },
   { href: "/admin/products", icon: Boxes, label: "Products" },
+  { href: "/admin/seo/redirect-url", icon: ServerCogIcon, label: "Seo" },
   {
     label: "Orders",
     icon: ShoppingCart,
