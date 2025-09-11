@@ -12,6 +12,25 @@ const nextConfig = {
       },
     ],
   },
+  async redirects() {
+    return [
+      {
+        source: "/uncategorized/:path*",
+        destination: "/404",
+        permanent: false,
+      },
+      {
+        source: "/add-to-cart/:path*",
+        destination: "/404",
+        permanent: false,
+      },
+      {
+        source: "/page/:path*",
+        destination: "/404",
+        permanent: false,
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;
